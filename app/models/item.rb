@@ -6,4 +6,11 @@ class Item < ActiveRecord::Base
 
   validates :title, presence: true
 
+  def publish
+    update_attributes public: true
+  end
+
+  def hide
+    update_attributes public: false
+  end
 end

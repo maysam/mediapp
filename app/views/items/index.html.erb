@@ -1,16 +1,36 @@
-<h1>Media items</h1>
+<div class="pull-left">
+  <h1>My Media items</h1>
+</div>
+<div class="pull-right">
+  <%= link_to 'New Item', new_item_path, class: 'btn btn-primary' %>
+</div>
+<div class='clearfix'></div>
 
 <table class="table table-bordered table-striped">
   <tbody>
     <% @items.each do |item| %>
       <tr class="row">
-        <td class="col-md-10">
+        <td class="col-md-1">
+          <% unless item.public? %>
+            <%= link_to 'Publish', publish_item_path(item), class: 'btn btn-success' %>
+          <% else %>
+            <%= link_to 'Conceal', hide_item_path(item), class: 'btn btn-warning' %>
+          <% end %>
+        </td>
+        <td class="col-md-9">
+          <% unless item.public? %>
+            <span class="fa fa-eye-slash" aria-hidden="true"></span>
+          <% else %>
+            <span class="fa fa-eye" aria-hidden="true"></span>
+          <% end %>
           <%= item.title %>
-          <br />
-          <span class="fa fa-arrow-right" aria-hidden="true"></span>
-          <%= link_to item.link, item.link, target: '_blank' %>
-          <br />
+          <% if item.link.present? %>
+            <br />
+            <span class="fa fa-arrow-right" aria-hidden="true"></span>
+            <%= link_to item.link, item.link, target: '_blank' %>
+          <% end %>
           <% if item.image.exists? %>
+            <br />
             <%= link_to image_tag(item.image.url(:medium)), item.image.url %>
           <% end %>
         </td>
@@ -22,7 +42,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Item', new_item_path, class: 'btn btn-primary' %>

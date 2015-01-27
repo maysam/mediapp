@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :items
 
+  get 'items/:id/publish' => 'items#publish', as: :publish_item
+  get 'items/:id/hide' => 'items#hide', as: :hide_item
+
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

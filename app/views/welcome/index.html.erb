@@ -1,0 +1,19 @@
+<table class="table table-bordered table-striped">
+  <tbody>
+    <% @items.each do |item| %>
+      <tr class="row">
+        <td class="col-md-12">
+          <% if item.link.present? %>
+            <%= link_to item.title, item.link, target: '_blank' %>
+          <% else %>
+            <%= item.title %>
+          <% end %>
+          <% if item.image.exists? %>
+            <br />
+            <%= link_to image_tag(item.image.url(:medium)), item.image.url, target: '_blank' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
