@@ -1,0 +1,24 @@
+<h1>Media items</h1>
+
+<table class="table table-bordered table-striped">
+  <tbody>
+    <% @items.each do |item| %>
+      <tr class="row">
+        <td class="col-md-10">
+          <%= item.title %>
+          <br />
+          <span class="fa fa-arrow-right" aria-hidden="true"></span>
+          <%= link_to item.link, item.link, target: '_blank' %>
+        </td>
+        <td class="col-md-2">
+          <%= link_to 'Edit', edit_item_path(item), class: 'btn btn-success' %>
+          <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Item', new_item_path, class: 'btn btn-primary' %>
