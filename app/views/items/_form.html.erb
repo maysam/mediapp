@@ -1,5 +1,5 @@
 
-<%= form_for @item, class: 'form-horizontal' do |f| %>
+<%= form_for @item, html: { multipart: true }, class: 'form-horizontal' do |f| %>
   <% if @item.errors.any? %>
     <div id="error_explanation" class="alert alert-warning alert-dismissible" role="alert">
       <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -20,6 +20,10 @@
     <%= f.label :link %><br />
     <%= f.text_field :link, class: 'form-control' %>
   </div>
+  <%= f.file_field :image %>
+  <% if @item.image.exists? %>
+    <%= link_to image_tag(@item.image.url(:medium)), @item.image.url %>
+  <% end %>
   <div class="actions">
     <%= f.submit class: 'btn btn-default btn-primary' %>
   </div>

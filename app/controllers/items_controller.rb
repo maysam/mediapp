@@ -65,6 +65,7 @@ class ItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
       params[:item][:user_id] = current_user.id
-      params.require(:item).permit(:title, :link, :user_id)
+      params.require(:item).permit(:title, :link, :user_id, :image)
+      # params.require(:item).permit(:title, :link, :user_id, image: [:tempfile, :original_filename, :content_type, :headers])
     end
 end
